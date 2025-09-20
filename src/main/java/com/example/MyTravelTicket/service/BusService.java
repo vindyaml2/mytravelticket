@@ -1,7 +1,10 @@
 package com.example.MyTravelTicket.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.example.MyTravelTicket.dto.BusDto;
+import com.example.MyTravelTicket.mapper.BusMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,20 @@ public class BusService {
     @Autowired
     private BusRepository busRepository;
 
-    public Bus save(Bus bus){
+
+    public BusDto save(Bus bus){
         Bus savedBus = busRepository.save(bus);
-        return savedBus;
+        BusDto busDto = BusMapper.toBusDto(savedBus);
+        return busDto;
     }
 
-    public List<Bus> getAllBuses() {
+    public List<BusDto> getAllBuses() {
        List<Bus> allBuses = busRepository.findAll();
-       return allBuses;
+       List<BusDto> allBusesDto = new ArrayList<>();
+       for(Bus bus: allBuses){
+           BusDto busDto = BusMapper.toBusDto(bus);
+           allBusesDto.add(busDto);
+       }
+       return allBusesDto;
     } 
 }

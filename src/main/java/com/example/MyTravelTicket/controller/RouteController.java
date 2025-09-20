@@ -2,6 +2,7 @@ package com.example.MyTravelTicket.controller;
 
 import java.util.List;
 
+import com.example.MyTravelTicket.dto.RouteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -26,13 +27,13 @@ public class RouteController {
 
     @PostMapping
     private ResponseEntity<?> saveRoute(@RequestBody Route route){
-        Route savedRoute = routeService.save(route);
+        RouteDto savedRoute = routeService.save(route);
         return new ResponseEntity<>(savedRoute, HttpStatus.CREATED);
     }
 
     @GetMapping
     private ResponseEntity<?> getAllRoutes(){
-        List<Route> allRoute = routeService.getAllRoutes();
+        List<RouteDto> allRoute = routeService.getAllRoutes();
         return new ResponseEntity<>(allRoute, HttpStatus.ACCEPTED);
     }
 
