@@ -2,6 +2,7 @@ package com.example.MyTravelTicket.controller;
 
 import java.util.List;
 
+import com.example.MyTravelTicket.dto.BusDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,13 @@ public class BusController {
 
     @PostMapping
     private ResponseEntity<?> saveBus(@RequestBody Bus bus){
-        Bus savedBus = busService.save(bus);
+        BusDto savedBus = busService.save(bus);
         return new ResponseEntity<>(savedBus, HttpStatus.CREATED);
     }
 
     @GetMapping
     private ResponseEntity<?> getAllBuses(){
-        List<Bus> allBuses = busService.getAllBuses();
+        List<BusDto> allBuses = busService.getAllBuses();
         return new ResponseEntity<>(allBuses, HttpStatus.OK);
     }
 }

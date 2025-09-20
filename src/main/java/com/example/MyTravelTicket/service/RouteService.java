@@ -1,8 +1,11 @@
 package com.example.MyTravelTicket.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.MyTravelTicket.dto.RouteDto;
+import com.example.MyTravelTicket.mapper.RouteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +18,20 @@ public class RouteService {
     @Autowired
     private RouteRepository routeRepository;
 
-    public Route save(Route route){
+    public RouteDto save(Route route){
         Route savedRoute = routeRepository.save(route);
-        return savedRoute;
+        RouteDto routeDto = RouteMapper.toRouteDto(savedRoute);
+        return routeDto;
     }
 
-    public List<Route> getAllRoutes() {
+    public List<RouteDto> getAllRoutes() {
         List<Route> allRoutes = routeRepository.findAll();
-        return allRoutes;
+        List<RouteDto> allRouteDto = new ArrayList<>();
+        for(Route route: allRoutes){
+            RouteDto routeDto = RouteMapper.toRouteDto(route);
+            allRouteDto.add(routeDto);
+        }
+        return allRouteDto;
     }
 
     public Route getRoute(Long routeId){
