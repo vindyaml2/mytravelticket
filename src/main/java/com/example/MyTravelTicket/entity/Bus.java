@@ -3,6 +3,8 @@ package com.example.MyTravelTicket.entity;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
@@ -17,6 +19,8 @@ import lombok.Data;
 
 @Entity
 @Data
+@Getter
+@Setter
 public class Bus {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

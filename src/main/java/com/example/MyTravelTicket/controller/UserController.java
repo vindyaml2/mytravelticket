@@ -2,6 +2,7 @@ package com.example.MyTravelTicket.controller;
 
 import java.util.List;
 
+import com.example.MyTravelTicket.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class UserController {
     
     @PostMapping
     ResponseEntity<?> saveuser(@RequestBody User user){
-        User savedUser = null;
+        UserDto savedUser = null;
         try{
            savedUser = userService.saveUser(user);
         }
@@ -35,7 +36,7 @@ public class UserController {
 
     @GetMapping
     ResponseEntity<?> getAllUsers(){
-        List<User> allUsers = userService.getAllUsers();
+        List<UserDto> allUsers = userService.getAllUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.ACCEPTED);
     }
 }
