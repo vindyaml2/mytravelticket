@@ -27,6 +27,16 @@ public class BusStopController {
         List<BusStopDto> allBusStopDto = busStopService.getAllBusStops();
         return new ResponseEntity<>(allBusStopDto, HttpStatus.OK);
     }
+
+    @GetMapping("/id")
+    private ResponseEntity<?> getBusStopById(@RequestParam Long busStopId) throws Exception {
+        try {
+            BusStopDto busStopDto = busStopService.getBusStopById(busStopId);
+            return new ResponseEntity<>(busStopDto, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
     @PutMapping
     private ResponseEntity<?> updateBusStop(@RequestBody BusStopDto busStop){
         try {
