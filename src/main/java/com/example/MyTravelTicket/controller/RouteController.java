@@ -2,6 +2,7 @@ package com.example.MyTravelTicket.controller;
 
 import java.util.List;
 
+import com.example.MyTravelTicket.dto.BusStopDto;
 import com.example.MyTravelTicket.dto.RouteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,11 @@ public class RouteController {
     private ResponseEntity<?> getAllRoutes(){
         List<RouteDto> allRoute = routeService.getAllRoutes();
         return new ResponseEntity<>(allRoute, HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/stops")
+    private ResponseEntity<?> getAllStopsForGivenRoute(@RequestParam Long routeId){
+        List<BusStopDto> allBusStopsforTheRoute = routeService.getAllBusStopsForRoute(routeId);
+        return new ResponseEntity<>(allBusStopsforTheRoute, HttpStatus.OK);
     }
 
     @DeleteMapping
