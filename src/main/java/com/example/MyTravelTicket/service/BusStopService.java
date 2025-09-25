@@ -69,4 +69,10 @@ public class BusStopService {
 
         busStopRepository.save(savedBusStop);
     }
+
+    public BusStopDto getBusStopById(Long busStopId) throws Exception {
+        BusStop busStop = getBusStop(busStopId);
+        BusStopDto busStopDto = BusStopMapper.toBusStopDto(busStop);
+        return busStopDto;
+    }
 }
