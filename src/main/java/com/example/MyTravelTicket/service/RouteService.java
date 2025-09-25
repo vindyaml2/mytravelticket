@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.MyTravelTicket.dto.BusStopDto;
 import com.example.MyTravelTicket.dto.RouteDto;
-import com.example.MyTravelTicket.entity.BusStop;
-import com.example.MyTravelTicket.mapper.BusStopMapper;
 import com.example.MyTravelTicket.mapper.RouteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +17,6 @@ public class RouteService {
     
     @Autowired
     private RouteRepository routeRepository;
-
-    @Autowired
-    private BusStopService busStopService;
 
     public RouteDto save(Route route){
         Route savedRoute = routeRepository.save(route);
@@ -55,15 +49,5 @@ public class RouteService {
             return;
         }
         throw new Exception("route not found for given routeId");
-    }
-
-    public List<BusStopDto> getAllBusStopsForRoute(Long routeId) {
-        List<BusStop> allBusStopsByRoute = busStopService.getAllBusStopsForRoute(routeId);
-        List<BusStopDto> allBusStopByRouteDto = new ArrayList<>();
-        for (BusStop busStop: allBusStopsByRoute){
-            BusStopDto busStopDto = BusStopMapper.toBusStopDto(busStop);
-            allBusStopByRouteDto.add(busStopDto);
-        }
-        return allBusStopByRouteDto;
     }
 }

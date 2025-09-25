@@ -4,26 +4,23 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = "busStop")
 public class Route {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String routeName;
+
     @ManyToMany(mappedBy = "route")
     @JsonIgnore
     private Set<Bus> bus;
-
-    @ManyToMany(mappedBy = "routeStops")
-    @JsonIgnore
-    @ToString.Exclude
-    private Set<BusStop> busStop;
 }
