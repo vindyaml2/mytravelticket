@@ -24,6 +24,7 @@ public class UserController {
     
     @PostMapping
     ResponseEntity<?> saveuser(@RequestBody User user){
+        System.out.println(user);
         UserDto savedUser = null;
         try{
            savedUser = userService.saveUser(user);
@@ -38,5 +39,17 @@ public class UserController {
     ResponseEntity<?> getAllUsers(){
         List<UserDto> allUsers = userService.getAllUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/id")
+    ResponseEntity<?> getUserById(Long userId){
+        UserDto user = null;
+        try{
+            user = userService.getUserById(userId);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 }

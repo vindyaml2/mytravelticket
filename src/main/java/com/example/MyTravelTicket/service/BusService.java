@@ -31,5 +31,11 @@ public class BusService {
            allBusesDto.add(busDto);
        }
        return allBusesDto;
+    }
+
+    public BusDto getBusById(Long busId) throws Exception {
+        Bus bus = busRepository.findById(busId).orElseThrow(()-> new RuntimeException("Bus not found with id: " + busId));
+        BusDto busDto = BusMapper.toBusDto(bus);
+        return busDto;
     } 
 }
