@@ -15,6 +15,7 @@ public class UserMapper {
                 .panNumber(user.getPanNumber())
                 .address(user.getAddress())
                 .createdAt(user.getCreatedAt())
+                .userType(user.getUserType())
                 .build();
         return userDto;
     }

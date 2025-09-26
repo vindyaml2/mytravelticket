@@ -40,16 +40,9 @@ public class RouteService {
         return allRouteDto;
     }
 
-    public Route getRoute(Long routeId){
-        Optional<Route> savedRoute = routeRepository.findById(routeId);
-        if(savedRoute.isPresent()){
-            return savedRoute.get();
-        }
-        return null;
-    }
 
     public void deleteRoute(Long routeId) throws Exception {
-        Route savedRoute = getRoute(routeId);
+        Route savedRoute = routeRepository.findById(routeId).orElseThrow(() -> new Exception("route not found for given routeId"));
         if(savedRoute != null){
             routeRepository.delete(savedRoute);
             return;
@@ -65,5 +58,11 @@ public class RouteService {
             allBusStopByRouteDto.add(busStopDto);
         }
         return allBusStopByRouteDto;
+    }
+
+    public RouteDto getRouteDto(Long routeId) throws Exception {
+        Route route = routeRepository.findById(routeId).orElseThrow(() -> new Exception("Route not found for given routeId"));
+        RouteDto routeDto = RouteMapper.toRouteDto(route);
+        return routeDto;
     }
 }

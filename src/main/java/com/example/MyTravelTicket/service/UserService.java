@@ -1,10 +1,13 @@
 package com.example.MyTravelTicket.service;
 
+import java.lang.classfile.ClassFile.Option;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.MyTravelTicket.dto.UserDto;
 import com.example.MyTravelTicket.mapper.UserMapper;
+
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,5 +51,15 @@ public class UserService {
             allUsersDto.add(userDto);
         }
         return allUsersDto;
+    }
+
+    public UserDto getUserById(Long userId) throws Exception {
+        java.util.Optional<User> userOptional = userRepository.findById(userId);
+        if(userOptional.isEmpty()){
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+        User user = userOptional.get();
+        UserDto userDto = UserMapper.toDto(user);
+        return userDto;
     }
 }
