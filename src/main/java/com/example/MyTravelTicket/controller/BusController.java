@@ -3,10 +3,13 @@ package com.example.MyTravelTicket.controller;
 import java.util.List;
 
 import com.example.MyTravelTicket.dto.BusDto;
+import com.example.MyTravelTicket.dto.BusFilterDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +34,11 @@ public class BusController {
     private ResponseEntity<?> getAllBuses(){
         List<BusDto> allBuses = busService.getAllBuses();
         return new ResponseEntity<>(allBuses, HttpStatus.OK);
+    }
+
+    @GetMapping("/filter")
+    private ResponseEntity<?> getBusesByFilter(@ModelAttribute BusFilterDto busFilterDto){
+        List<BusDto> filteredBuses = busService.getBusesByFilter(busFilterDto);
+        return new ResponseEntity<>(filteredBuses, HttpStatus.OK);
     }
 }

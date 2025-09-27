@@ -16,6 +16,7 @@ public class UserMapper {
                 .address(user.getAddress())
                 .createdAt(user.getCreatedAt())
                 .userType(user.getUserType())
+                .isOnDuty(user.getIsOnDuty())
                 .build();
         return userDto;
     }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.MyTravelTicket.dto.BusDto;
+import com.example.MyTravelTicket.dto.BusFilterDto;
 import com.example.MyTravelTicket.mapper.BusMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,22 @@ public class BusService {
         Bus bus = busRepository.findById(busId).orElseThrow(()-> new RuntimeException("Bus not found with id: " + busId));
         BusDto busDto = BusMapper.toBusDto(bus);
         return busDto;
+    }
+
+    public List<BusDto> getBusesByFilter(BusFilterDto busFilterDto) {
+        List<Bus> allBusesDto = busRepository.findAll();
+        List<Bus> filteredBuses = new ArrayList<>();
+        for(Bus bus: allBusesDto){
+            if(busFilterDto.getIsOnDuty() != null && bus.getIsOnDuty() != busFilterDto.getIsOnDuty()){
+                continue;
+            }
+            filteredBuses.add(bus);
+        }
+        List<BusDto> allBusesDtoAferFilter = new ArrayList<>();
+        for(Bus bus: filteredBuses){
+            BusDto busDto = BusMapper.toBusDto(bus);
+            allBusesDtoAferFilter.add(busDto);
+        }
+        return allBusesDtoAferFilter;
     } 
 }
