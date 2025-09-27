@@ -1,9 +1,7 @@
 package com.example.MyTravelTicket.service;
 
 import com.example.MyTravelTicket.dto.BusStopDto;
-import com.example.MyTravelTicket.entity.Bus;
 import com.example.MyTravelTicket.entity.BusStop;
-import com.example.MyTravelTicket.entity.Route;
 import com.example.MyTravelTicket.mapper.BusStopMapper;
 import com.example.MyTravelTicket.repository.BusStopRepository;
 import org.springframework.beans.factory.annotation.Autowired;

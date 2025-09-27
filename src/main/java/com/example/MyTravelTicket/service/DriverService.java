@@ -17,7 +17,6 @@ public class DriverService {
     private UserRepository userRepository;
 
     public UserDto saveDriver(User driver) {
-        System.out.println(driver);
         driver.setUserType(UserType.DRIVER);
         User savedDriver = userRepository.save(driver);
         UserDto savedDriverDto = UserMapper.toDto(savedDriver);

@@ -19,4 +19,12 @@ public class UserDto {
     private String address;
     private UserType userType;
     private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+    private LocalDateTime lastServicedAt;
+
+    private LocalDateTime deletedAt;
+    private LocalDateTime dayLogInTime;
+    private LocalDateTime dayLogOutTime;
+    private boolean isOnDuty;
 }

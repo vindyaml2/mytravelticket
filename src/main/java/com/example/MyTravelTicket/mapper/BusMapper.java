@@ -12,6 +12,7 @@ public class BusMapper {
                 .registrationNumber(bus.getRegistrationNumber())
                 .createdAt(bus.getCreatedAt())
                 .isBusOnCoditionAndRunning(bus.getIsBusOnCoditionAndRunning())
+                .isOnDuty(bus.getIsOnDuty())
                 .build();
         return busDto;
     }

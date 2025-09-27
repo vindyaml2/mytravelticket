@@ -12,7 +12,6 @@ import com.example.MyTravelTicket.dto.BusDto;
 import com.example.MyTravelTicket.dto.RouteDto;
 import com.example.MyTravelTicket.dto.UserDto;
 import com.example.MyTravelTicket.entity.BusDriverConductorMapper;
-import com.example.MyTravelTicket.entity.Route;
 import com.example.MyTravelTicket.repository.BusDriverConductorMapperRepository;
 
 @Service

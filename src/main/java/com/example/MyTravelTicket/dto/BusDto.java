@@ -2,8 +2,6 @@ package com.example.MyTravelTicket.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -14,4 +12,12 @@ public class BusDto {
     private String registrationNumber;
     private Boolean isBusOnCoditionAndRunning;
     private LocalDateTime createdAt;
+    private Boolean isOnDuty;
+
+    private LocalDateTime updatedAt;
+    private LocalDateTime lastServicedAt;
+
+    private LocalDateTime deletedAt;
+    private LocalDateTime dayLogInTime;
+    private LocalDateTime dayLogOutTime;
 }

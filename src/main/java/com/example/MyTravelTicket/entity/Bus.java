@@ -5,6 +5,7 @@ import java.util.Set;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
@@ -40,6 +41,15 @@ public class Bus {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+    private LocalDateTime lastServicedAt;
+
+    private LocalDateTime deletedAt;
+    private LocalDateTime dayLogInTime;
+    private LocalDateTime dayLogOutTime;
+
+    private Boolean isOnDuty;
 
     @ManyToMany
     @JoinTable(name = "bus_route_mapper", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))

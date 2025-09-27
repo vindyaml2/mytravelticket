@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MyTravelTicket.dto.UserDto;
@@ -38,7 +39,8 @@ public class BusConductorController {
         return ResponseEntity.status(202).body(allConductors);
     }
 
-    private ResponseEntity<?> getBusConductorById(Long busConductorId){
+    @GetMapping("/id")
+    private ResponseEntity<?> getBusConductorById(@RequestParam Long busConductorId){
         try{
            UserDto busConductorDto = busConductorService.getBusConductor(busConductorId);
            return ResponseEntity.status(200).body(busConductorDto);
