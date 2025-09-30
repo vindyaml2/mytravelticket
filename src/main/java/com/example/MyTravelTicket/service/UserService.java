@@ -68,7 +68,7 @@ public class UserService {
 
         // Define a map of predicates for filtering
         List<java.util.function.Predicate<User>> predicates = List.of(
-            userFilterDto.getUserType() != null ? user -> user.getUserType().equals(userFilterDto.getUserType()) : user -> true,
+            userFilterDto.getUserType() != null ? user -> user.getUserType() != null && user.getUserType().equals(userFilterDto.getUserType()) : user -> true,
             userFilterDto.getIsOnDuty() != null ? user -> user.getIsOnDuty().equals(userFilterDto.getIsOnDuty()) : user -> true
         );
 

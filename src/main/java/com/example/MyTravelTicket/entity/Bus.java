@@ -49,7 +49,7 @@ public class Bus {
     private LocalDateTime dayLogInTime;
     private LocalDateTime dayLogOutTime;
 
-    private Boolean isOnDuty;
+    private Boolean isOnDuty = false;
 
     @ManyToMany
     @JoinTable(name = "bus_route_mapper", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
