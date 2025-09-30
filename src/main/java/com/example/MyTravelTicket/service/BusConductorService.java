@@ -1,5 +1,6 @@
 package com.example.MyTravelTicket.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,13 @@ public class BusConductorService {
                 .orElseThrow(() -> new RuntimeException("Bus Conductor not found with id: " + busConductorId));
         UserDto conductorDto = UserMapper.toDto(conductor);
         return conductorDto;
+    }
+
+    public void updateBusConductorLoginTimeAndOnDutyStatus(Long conductorId) throws Exception {
+         User conductor = userRepository.findById(conductorId)
+                .orElseThrow(() -> new RuntimeException("Driver not found with id: " + conductorId));
+        conductor.setIsOnDuty(true);
+        conductor.setDayLogInTime(LocalDateTime.now());
+        userRepository.save(conductor);
     }
 }

@@ -55,5 +55,11 @@ public class BusService {
             allBusesDtoAferFilter.add(busDto);
         }
         return allBusesDtoAferFilter;
+    }
+
+    public void updateBusOnDutyStatus(Long busId) throws Exception {
+        Bus bus = busRepository.findById(busId).orElseThrow(()-> new RuntimeException("Bus not found with id: " + busId));
+        bus.setIsOnDuty(true);
+        busRepository.save(bus);
     } 
 }

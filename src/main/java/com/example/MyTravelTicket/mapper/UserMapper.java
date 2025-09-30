@@ -17,6 +17,8 @@ public class UserMapper {
                 .createdAt(user.getCreatedAt())
                 .userType(user.getUserType())
                 .isOnDuty(user.getIsOnDuty())
+                .dayLogInTime(user.getDayLogInTime())
+                .dayLogOutTime(user.getDayLogOutTime())
                 .build();
         return userDto;
     }
