@@ -1,6 +1,7 @@
 package com.example.MyTravelTicket.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.example.MyTravelTicket.dto.BusStopDto;
@@ -56,6 +57,7 @@ public class RouteService {
             BusStopDto busStopDto = BusStopMapper.toBusStopDto(busStop);
             allBusStopByRouteDto.add(busStopDto);
         }
+        Collections.sort(allBusStopByRouteDto, (a, b) -> a.getBusStopOrder().compareTo(b.getBusStopOrder()));
         return allBusStopByRouteDto;
     }
 
