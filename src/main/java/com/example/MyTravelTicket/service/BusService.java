@@ -1,5 +1,6 @@
 package com.example.MyTravelTicket.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +61,13 @@ public class BusService {
     public void updateBusOnDutyStatus(Long busId) throws Exception {
         Bus bus = busRepository.findById(busId).orElseThrow(()-> new RuntimeException("Bus not found with id: " + busId));
         bus.setIsOnDuty(true);
+        busRepository.save(bus);
+    }
+
+    public void updateBusLoginAndLogOutStatus(Long busId) {
+        Bus bus = busRepository.findById(busId).orElseThrow(()-> new RuntimeException("Bus not found with id: " + busId));
+        bus.setIsOnDuty(true);
+        bus.setDayLogInTime(LocalDateTime.now());
         busRepository.save(bus);
     } 
 }

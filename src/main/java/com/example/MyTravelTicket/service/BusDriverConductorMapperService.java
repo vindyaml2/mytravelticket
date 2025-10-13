@@ -32,10 +32,11 @@ public class BusDriverConductorMapperService {
     @Autowired
     private RouteService routeService;
 
-    public void updateUserLoginTimeAndOnDutyStatus(Long driverId, Long conductorId) throws Exception {
+    public void updateUserLoginTimeAndOnDutyStatus(Long driverId, Long conductorId, Long busId) throws Exception {
         try {
             driverService.updateDriverLoginTimeAndOnDutyStatus(driverId);
             busConductorService.updateBusConductorLoginTimeAndOnDutyStatus(conductorId);
+            busService.updateBusLoginAndLogOutStatus(busId);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -60,7 +61,7 @@ public class BusDriverConductorMapperService {
             busDriverConductorMapper.setDriverId(busDriver.getId());
             busDriverConductorMapper.setRouteId(route.getId());
 
-            updateUserLoginTimeAndOnDutyStatus(busDriver.getId(), busConductor.getId());
+            updateUserLoginTimeAndOnDutyStatus(busDriver.getId(), busConductor.getId(), busDto.getId());
             updateBusOnDuty(busDto.getId());
             busDriverConductorMapperRepository.save(busDriverConductorMapper);
         } catch (Exception e) {

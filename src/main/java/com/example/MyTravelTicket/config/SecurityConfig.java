@@ -31,7 +31,6 @@ public class SecurityConfig  implements WebMvcConfigurer{
     // every 1 hour
     @Scheduled(cron = "0 0 * * * *")
     public void scheduledTask() {
-        System.out.println("Auto update logout time and on duty status task started");
         cronService.updateLogOutTimeandOnDutyStatus();
     }
 }
