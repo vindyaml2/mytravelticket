@@ -1,18 +1,19 @@
 package com.example.MyTravelTicket.controller;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.MyTravelTicket.entity.Ticket;
 import com.example.MyTravelTicket.service.TicketService;
 import java.math.BigDecimal;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import java.util.List;
 
 @RequestMapping("/ticket")
 @RestController
@@ -35,5 +36,15 @@ public class TicketController {
     private ResponseEntity<?> getTicketPrice(@RequestBody Ticket ticket) throws Exception {
         BigDecimal price = ticketService.calculateTicketPrice(ticket);
         return new ResponseEntity<>(price, HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/passenger")
+    private ResponseEntity<?> getAllTicketByUserId(@RequestParam Long userId){
+        try{
+            List<Ticket> ticket = ticketService.getAllTicketsByUserId(userId);
+            return new ResponseEntity<>(ticket, HttpStatus.ACCEPTED);
+        } 
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

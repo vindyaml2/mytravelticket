@@ -1,6 +1,7 @@
 package com.example.MyTravelTicket.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.MyTravelTicket.dto.BusStopDto;
 import com.example.MyTravelTicket.dto.RouteDto;
@@ -30,7 +31,8 @@ public class TicketService {
     }
 
     public List<Ticket> getAllTickets(){
-        return ticketRepository.findAll();
+        List<Ticket> tickets = ticketRepository.findAll();
+        return tickets;
     }
 
     public BigDecimal calculateTicketPrice(Ticket ticket) throws Exception {
@@ -60,6 +62,11 @@ public class TicketService {
         else{
             return new BigDecimal("25.00");
         }
+    }
+
+    public List<Ticket> getAllTicketsByUserId(Long userId) {
+        List<Ticket> ticketList = ticketRepository.findByUserId(userId);
+       return ticketList;
     }
 
 }

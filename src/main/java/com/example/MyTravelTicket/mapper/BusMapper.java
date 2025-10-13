@@ -13,6 +13,8 @@ public class BusMapper {
                 .createdAt(bus.getCreatedAt())
                 .isBusOnCoditionAndRunning(bus.getIsBusOnCoditionAndRunning())
                 .isOnDuty(bus.getIsOnDuty())
+                .dayLogInTime(bus.getDayLogInTime())
+                .dayLogOutTime(bus.getDayLogOutTime())
                 .build();
         return busDto;
     }
