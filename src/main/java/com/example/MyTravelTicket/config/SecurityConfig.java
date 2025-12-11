@@ -29,8 +29,8 @@ public class SecurityConfig  implements WebMvcConfigurer{
         return new BCryptPasswordEncoder();
     }
     // every 1 hour
-    @Scheduled(cron = "0 0 * * * *")
-    public void scheduledTask() {
-        cronService.updateLogOutTimeandOnDutyStatus();
-    }
+    // @Scheduled(cron = "0 0 * * * *")
+    // public void scheduledTask() {
+    //     cronService.updateLogOutTimeandOnDutyStatus();
+    // }
 }

@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 import com.example.MyTravelTicket.entity.Ticket;
 import com.example.MyTravelTicket.repository.TicketRepository;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import com.example.MyTravelTicket.entity.TicketStatus;
+import com.example.MyTravelTicket.exception.TicketException;
 
 @Service
 public class TicketService {
@@ -67,6 +71,27 @@ public class TicketService {
     public List<Ticket> getAllTicketsByUserId(Long userId) {
         List<Ticket> ticketList = ticketRepository.findByUserId(userId);
        return ticketList;
+    }
+
+    public Ticket getTicketById(Long ticketId) throws Exception {
+       Optional<Ticket> optionalTicket = ticketRepository.findById(ticketId);
+       if(optionalTicket.isPresent()){
+        return optionalTicket.get();
+       }
+       throw new Exception("ticket id not found");
+    }
+
+    public void validateTicketById(Long ticketId) throws Exception {
+        Ticket ticket = getTicketById(ticketId);
+        if(ticket.getTicketStatus() == TicketStatus.RIDECOMPLETE){
+            throw new Exception("Ride completed");
+        }
+        if(ticket.getTicketStatus()== TicketStatus.RIDESTARTED){
+            throw new TicketException("valid ticket on travel ride, this ticket is valid for 2 hours from created date time.");
+        }
+        ticket.setTicketStatus(TicketStatus.RIDESTARTED);
+        ticket.setUpdatedAt(LocalDateTime.now());
+        ticketRepository.save(ticket);
     }
 
 }
