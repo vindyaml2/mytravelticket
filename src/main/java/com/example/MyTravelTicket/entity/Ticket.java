@@ -1,6 +1,7 @@
 package com.example.MyTravelTicket.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -32,9 +33,10 @@ public class Ticket {
     private Long routeId;
     private Long busStopStartPoint;
     private Long busStopEndPoin;
+    private TicketStatus ticketStatus;
 
     @CreationTimestamp
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
-    private LocalDate deletedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 }

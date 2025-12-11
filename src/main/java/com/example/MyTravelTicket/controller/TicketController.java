@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.MyTravelTicket.entity.Ticket;
+import com.example.MyTravelTicket.exception.TicketException;
 import com.example.MyTravelTicket.service.TicketService;
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,7 +33,7 @@ public class TicketController {
         return ResponseEntity.status(202).body(ticketService.getAllTickets());
     }
 
-    @GetMapping("/price")
+    @PostMapping("/price")
     private ResponseEntity<?> getTicketPrice(@RequestBody Ticket ticket) throws Exception {
         BigDecimal price = ticketService.calculateTicketPrice(ticket);
         return new ResponseEntity<>(price, HttpStatus.ACCEPTED);
@@ -43,6 +44,31 @@ public class TicketController {
             List<Ticket> ticket = ticketService.getAllTicketsByUserId(userId);
             return new ResponseEntity<>(ticket, HttpStatus.ACCEPTED);
         } 
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/id")
+    private ResponseEntity<?> getTicketById(@RequestParam Long ticketId){
+        try{
+            Ticket ticket = ticketService.getTicketById(ticketId);
+            return new ResponseEntity<>(ticket, HttpStatus.ACCEPTED);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/validate")
+    private ResponseEntity<?> validateTicket(@RequestParam Long ticketId){
+        try{
+            ticketService.validateTicketById(ticketId);
+            return new ResponseEntity<>("Ticket valid", HttpStatus.ACCEPTED);
+        }
+        catch(TicketException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
         catch(Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
